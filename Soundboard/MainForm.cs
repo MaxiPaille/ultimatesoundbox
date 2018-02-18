@@ -15,8 +15,8 @@ using System.Web;
 using YoutubeExplode;
 using YoutubeExplode.Models.MediaStreams;
 using NAudio.Wave;
-using NAudio.Vorbis;
 using EventHook;
+using YoutubeExplode.Models;
 
 namespace Soundboard
 {
@@ -31,12 +31,20 @@ namespace Soundboard
         public float RemoteVolumeValue { get { return (1f * remoteVolume.Value * masterVolume.Value) / 10000f; } }
         public float LocalVolumeValue { get { return (1f * localVolume.Value * masterVolume.Value) / 10000f; } }
 
+        private int soundIndexWaitingForKeySetup = -1;
+
         public MainForm()
         {
             InitializeComponent();
 
             if (Preferences.Default.Filenames == null)
                 Preferences.Default.Filenames = new System.Collections.Specialized.StringCollection();
+
+            if (Preferences.Default.Keys == null)
+                Preferences.Default.Keys = new System.Collections.Specialized.StringCollection();
+
+            if (Preferences.Default.YoutubeNames == null)
+                Preferences.Default.YoutubeNames = new System.Collections.Specialized.StringCollection();
 
             m_youtubeClient = new YoutubeClient();
 
@@ -57,16 +65,27 @@ namespace Soundboard
         {
             if(e.KeyData.EventType == KeyEvent.down)
             {
-                Console.WriteLine(e.KeyData.Keyname);
+                if(soundIndexWaitingForKeySetup >= 0)
+                    SetupKey(soundIndexWaitingForKeySetup, e.KeyData.Keyname);
+                else
+                {
+                    if (e.KeyData.Keyname == "NumPad0")
+                        StopSound();
+                    for (int i = 0; i < Preferences.Default.Keys.Count; i++)
+                    {
+                        if (Preferences.Default.Keys[i] == e.KeyData.Keyname)
+                            PlaySound(Preferences.Default.Filenames[i]);
+                    }
+                }
             }
         }
 
         private void RefreshSoundList()
         {
-            soundList.Items.Clear();
+            soundList.Rows.Clear();
 
             for (int i = 0; i < Preferences.Default.Filenames.Count; i++)
-                soundList.Items.Add(Preferences.Default.Filenames[i]);
+                soundList.Rows.Add(new string[] { Preferences.Default.YoutubeNames[i], "Play", Preferences.Default.Keys[i] });
         }
 
         private void LoadAndRefreshVolumesFromSettings()
@@ -79,10 +98,12 @@ namespace Soundboard
         private async void downloadButton_Click(object sender, EventArgs e)
         {
             string id = YoutubeClient.ParseVideoId(youtubeURL.Text);
+            Video video = await m_youtubeClient.GetVideoAsync(id);
+            string name = video.Title;
 
             string filepath = await DownloadAudio(id);
 
-            AddSound(id, filepath);
+            AddSound(id, name, filepath);
 
             if (string.IsNullOrEmpty(filepath) == false)
                 PlaySound(filepath);
@@ -108,10 +129,12 @@ namespace Soundboard
             return filename;
         }
 
-        private void AddSound(string id, string filename)
+        private void AddSound(string id, string name, string filename)
         {
-            soundList.Items.Add(filename);
+            soundList.Rows.Add(new object[] { name, "Play", "None" });
             Preferences.Default.Filenames.Add(filename);
+            Preferences.Default.Keys.Add("None");
+            Preferences.Default.YoutubeNames.Add(name);
             Preferences.Default.Save();
         }
 
@@ -119,6 +142,12 @@ namespace Soundboard
         {
             m_remotePlayer.PlaySound(filepath);
             m_localPlayer.PlaySound(filepath);
+        }
+
+        public void StopSound()
+        {
+            m_remotePlayer.Stop();
+            m_localPlayer.Stop();
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -153,10 +182,37 @@ namespace Soundboard
             Preferences.Default.Save();
         }
 
-        private void OnSoundSelected(object sender, EventArgs e)
+        private void soundList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string filename = (string)soundList.SelectedItem;
-            PlaySound(filename);
+            var grid = (DataGridView)sender;
+
+            if (e.RowIndex >= 0)
+            {
+                if (grid.Columns[e.ColumnIndex] == playColumn)
+                {
+                    PlaySound(Preferences.Default.Filenames[e.RowIndex]);
+                }
+                else if(grid.Columns[e.ColumnIndex] == keyColumn)
+                {
+                    soundIndexWaitingForKeySetup = e.RowIndex;
+                    grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "...";
+                }
+            }
+
+        }
+
+        public void SetupKey(int index, string key)
+        {
+            soundIndexWaitingForKeySetup = -1;
+            Action action = () => { soundList.Rows[index].Cells[keyColumn.Index].Value = key; };
+            soundList.Invoke(action);
+            Preferences.Default.Keys[index] = key;
+            Preferences.Default.Save();
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

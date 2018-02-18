@@ -27,3 +27,34 @@ C:\Users\olija\documents\visual studio 2015\Projects\Soundboard\Soundboard\bin\D
 C:\Users\olija\documents\visual studio 2015\Projects\Soundboard\Soundboard\bin\Debug\Nito.AsyncEx.xml
 C:\Users\olija\documents\visual studio 2015\Projects\Soundboard\Soundboard\bin\Debug\Nito.AsyncEx.Concurrent.xml
 C:\Users\olija\documents\visual studio 2015\Projects\Soundboard\Soundboard\bin\Debug\Nito.AsyncEx.Enlightenment.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Soundboard.exe.config
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\obj\Debug\Soundboard.csprojResolveAssemblyReference.cache
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\obj\Debug\Soundboard.MainForm.resources
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\obj\Debug\Soundboard.Properties.Resources.resources
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\obj\Debug\Soundboard.SettingsForm.resources
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\obj\Debug\Soundboard.csproj.GenerateResource.Cache
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Soundboard.exe
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Soundboard.pdb
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\AngleSharp.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\EventHook.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\NAudio.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Newtonsoft.Json.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Nito.AsyncEx.Concurrent.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Nito.AsyncEx.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Nito.AsyncEx.Enlightenment.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\YoutubeExplode.dll
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\AngleSharp.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\NAudio.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Newtonsoft.Json.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Nito.AsyncEx.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Nito.AsyncEx.Concurrent.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\Nito.AsyncEx.Enlightenment.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\bin\Debug\YoutubeExplode.xml
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\obj\Debug\Soundboard.exe
+C:\Users\olija\Desktop\Projects\ultimatesoundbox\Soundboard\obj\Debug\Soundboard.pdb

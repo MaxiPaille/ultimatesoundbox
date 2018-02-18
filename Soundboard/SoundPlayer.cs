@@ -43,6 +43,7 @@ namespace Soundboard
             else
             {
                 m_audioFile = new AudioFileReader("Library\\" + filename);
+                //m_audioFile.Skip();
                 m_player.Init(m_audioFile);
                 m_player.Play();
                 m_delayedAction = null;

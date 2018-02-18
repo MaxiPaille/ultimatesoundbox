@@ -42,25 +42,31 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.soundList = new System.Windows.Forms.ListBox();
+            this.soundList = new System.Windows.Forms.DataGridView();
+            this.filenameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.playColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.keyColumn = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.startTimestampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endTimestampColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.masterVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.localVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.remoteVolume)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.soundList)).BeginInit();
             this.SuspendLayout();
             // 
             // youtubeURL
             // 
             this.youtubeURL.Location = new System.Drawing.Point(12, 35);
             this.youtubeURL.Name = "youtubeURL";
-            this.youtubeURL.Size = new System.Drawing.Size(358, 20);
+            this.youtubeURL.Size = new System.Drawing.Size(536, 20);
             this.youtubeURL.TabIndex = 0;
             this.youtubeURL.Text = "https://www.youtube.com/watch?v=vrdk3IGcau8";
             // 
             // downloadButton
             // 
-            this.downloadButton.Location = new System.Drawing.Point(377, 34);
+            this.downloadButton.Location = new System.Drawing.Point(554, 35);
             this.downloadButton.Name = "downloadButton";
             this.downloadButton.Size = new System.Drawing.Size(78, 23);
             this.downloadButton.TabIndex = 1;
@@ -90,8 +96,9 @@
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
@@ -185,12 +192,68 @@
             // 
             // soundList
             // 
-            this.soundList.FormattingEnabled = true;
+            this.soundList.AllowUserToAddRows = false;
+            this.soundList.AllowUserToDeleteRows = false;
+            this.soundList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.soundList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.soundList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.soundList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.filenameColumn,
+            this.playColumn,
+            this.keyColumn,
+            this.startTimestampColumn,
+            this.endTimestampColumn});
+            this.soundList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.soundList.Location = new System.Drawing.Point(12, 61);
+            this.soundList.MultiSelect = false;
             this.soundList.Name = "soundList";
-            this.soundList.Size = new System.Drawing.Size(358, 225);
-            this.soundList.TabIndex = 5;
-            this.soundList.SelectedIndexChanged += new System.EventHandler(this.OnSoundSelected);
+            this.soundList.ReadOnly = true;
+            this.soundList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.soundList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.soundList.ShowCellErrors = false;
+            this.soundList.ShowCellToolTips = false;
+            this.soundList.ShowEditingIcon = false;
+            this.soundList.ShowRowErrors = false;
+            this.soundList.Size = new System.Drawing.Size(536, 226);
+            this.soundList.TabIndex = 6;
+            this.soundList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.soundList_CellContentClick);
+            // 
+            // filenameColumn
+            // 
+            this.filenameColumn.HeaderText = "Filename";
+            this.filenameColumn.Name = "filenameColumn";
+            this.filenameColumn.ReadOnly = true;
+            this.filenameColumn.Width = 74;
+            // 
+            // playColumn
+            // 
+            this.playColumn.HeaderText = "Play";
+            this.playColumn.Name = "playColumn";
+            this.playColumn.ReadOnly = true;
+            this.playColumn.Width = 33;
+            // 
+            // keyColumn
+            // 
+            this.keyColumn.HeaderText = "Key";
+            this.keyColumn.Name = "keyColumn";
+            this.keyColumn.ReadOnly = true;
+            this.keyColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.keyColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.keyColumn.Width = 50;
+            // 
+            // startTimestampColumn
+            // 
+            this.startTimestampColumn.HeaderText = "Start";
+            this.startTimestampColumn.Name = "startTimestampColumn";
+            this.startTimestampColumn.ReadOnly = true;
+            this.startTimestampColumn.Width = 54;
+            // 
+            // endTimestampColumn
+            // 
+            this.endTimestampColumn.HeaderText = "End";
+            this.endTimestampColumn.Name = "endTimestampColumn";
+            this.endTimestampColumn.ReadOnly = true;
+            this.endTimestampColumn.Width = 51;
             // 
             // MainForm
             // 
@@ -212,6 +275,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.masterVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.localVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.remoteVolume)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.soundList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,7 +297,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox soundList;
+        private System.Windows.Forms.DataGridView soundList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn filenameColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn playColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn keyColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startTimestampColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endTimestampColumn;
     }
 }
 
